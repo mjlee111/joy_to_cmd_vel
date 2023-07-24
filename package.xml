@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>joy_to_cmd_vel</name>
+  <version>0.1.0</version>
+  <description>
+    ROS 2 package to convert /joy messages to /cmd_vel messages.
+  </description>
+  
+  <!-- 패키지의 메인테이너 정보 -->
+  <maintainer email="menggu1234@naver.com">mjlee111</maintainer>
+  
+  <!-- 패키지의 라이선스 정보 -->
+  <license>MIT</license>
+  
+  <!-- 패키지의 빌드 의존성 설정 -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>rclcpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  
+  <!-- 패키지의 실행 의존성 설정 -->
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+
+  <!-- 패키지의 빌드 시스템 정보 -->
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+
