@@ -19,15 +19,15 @@ void JoyToCmdVelConverter::run()
     current_ang = acceleration(current_ang, target_ang, ACC_ANGULAR);
 
     // Limit linear and angular velocities
-    if (current_lin > CMD_MAX)
-        current_lin = CMD_MAX;
-    else if (current_lin < -CMD_MAX)
-        current_lin = -CMD_MAX;
+    if (current_lin > LINEAR_MAX)
+        current_lin = LINEAR_MAX;
+    else if (current_lin < -LINEAR_MAX)
+        current_lin = -LINEAR_MAX;
 
-    if (current_ang > CMD_MAX)
-        current_ang = CMD_MAX;
-    else if (current_ang < -CMD_MAX)
-        current_ang = -CMD_MAX;
+    if (current_ang > ANGULAR_MAX)
+        current_ang = ANGULAR_MAX;
+    else if (current_ang < -ANGULAR_MAX)
+        current_ang = -ANGULAR_MAX;
 
     cmd_vel_msg.linear.x = current_lin;
     cmd_vel_msg.angular.z = current_ang;

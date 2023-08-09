@@ -6,9 +6,10 @@
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 
-#define CMD_MAX 0.22
-#define ACC_LINEAR 0.05
-#define ACC_ANGULAR 0.05
+#define LINEAR_MAX 0.3
+#define ANGULAR_MAX 1.0
+#define ACC_LINEAR 0.1
+#define ACC_ANGULAR 0.2
 
 class JoyToCmdVelConverter
 {
