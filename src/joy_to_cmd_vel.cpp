@@ -12,10 +12,40 @@ JoyToCmdVelConverter::JoyToCmdVelConverter()
 void JoyToCmdVelConverter::joyCallback(const sensor_msgs::Joy::ConstPtr &joy_msg)
 {
     geometry_msgs::Twist cmd_vel_msg;
-    cmd_vel_msg.linear.x = joy_msg->axes[1];
-    cmd_vel_msg.angular.z = joy_msg->axes[3];
+    cmd_vel_msg.linear.x = acceleration(currnet_lin, joy_msg->axes[1]);
+    cmd_vel_msg.angular.z = acceleration(currnet_lin, joy_msg->axes[3]);
+
+    // cmd_vel_msg.linear.x = joy_msg->axes[1];
+    // cmd_vel_msg.angular.z = joy_msg->axes[3];
 
     cmd_vel_pub_.publish(cmd_vel_msg);
+}
+
+float JoyToCmdVelConverter::acceleration(float current, float target)
+{
+    if (target >= 0)
+    {
+        if (current < target)
+        {
+            current += ACC;
+        }
+        else
+        {
+            current = target;
+        }
+    }
+    else if (target < 0)
+    {
+        if (current > target)
+        {
+            current -= ACC;
+        }
+        else
+        {
+            current = target;
+        }
+    }
+    return current;
 }
 
 int main(int argc, char **argv)
