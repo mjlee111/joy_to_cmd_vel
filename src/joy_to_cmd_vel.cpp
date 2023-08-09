@@ -1,49 +1,55 @@
+// joy_to_cmd_vel/joy_to_cmd_vel.cpp
 #include "joy_to_cmd_vel/joy_to_cmd_vel.h"
 
 JoyToCmdVelConverter::JoyToCmdVelConverter()
+    : target_lin(0.0), target_ang(0.0), current_lin(0.0), current_ang(0.0)
 {
     nh_ = ros::NodeHandle("~");
 
     joy_sub_ = nh_.subscribe("/joy", 10, &JoyToCmdVelConverter::joyCallback, this);
 
-    cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/joy_to_cmd", 10);
+    cmd_vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
 }
 
-void JoyToCmdVelConverter::joyCallback(const sensor_msgs::Joy::ConstPtr &joy_msg)
+void JoyToCmdVelConverter::run()
 {
     geometry_msgs::Twist cmd_vel_msg;
-    cmd_vel_msg.linear.x = acceleration(currnet_lin, joy_msg->axes[1]);
-    cmd_vel_msg.angular.z = acceleration(currnet_lin, joy_msg->axes[3]);
 
-    // cmd_vel_msg.linear.x = joy_msg->axes[1];
-    // cmd_vel_msg.angular.z = joy_msg->axes[3];
+    current_lin = acceleration(current_lin, target_lin, ACC_LINEAR);
+    current_ang = acceleration(current_ang, target_ang, ACC_ANGULAR);
+
+    // Limit linear and angular velocities
+    if (current_lin > CMD_MAX)
+        current_lin = CMD_MAX;
+    else if (current_lin < -CMD_MAX)
+        current_lin = -CMD_MAX;
+
+    if (current_ang > CMD_MAX)
+        current_ang = CMD_MAX;
+    else if (current_ang < -CMD_MAX)
+        current_ang = -CMD_MAX;
+
+    cmd_vel_msg.linear.x = current_lin;
+    cmd_vel_msg.angular.z = current_ang;
 
     cmd_vel_pub_.publish(cmd_vel_msg);
 }
 
-float JoyToCmdVelConverter::acceleration(float current, float target)
+void JoyToCmdVelConverter::joyCallback(const sensor_msgs::Joy::ConstPtr &joy_msg)
 {
-    if (target >= 0)
+    target_lin = joy_msg->axes[1];
+    target_ang = joy_msg->axes[3];
+}
+
+float JoyToCmdVelConverter::acceleration(float current, float target, float acc)
+{
+    if (current < target)
     {
-        if (current < target)
-        {
-            current += ACC;
-        }
-        else
-        {
-            current = target;
-        }
+        current = std::min(current + acc, target);
     }
-    else if (target < 0)
+    else if (current > target)
     {
-        if (current > target)
-        {
-            current -= ACC;
-        }
-        else
-        {
-            current = target;
-        }
+        current = std::max(current - acc, target);
     }
     return current;
 }
@@ -52,6 +58,12 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "joy_to_cmd_vel_converter");
     JoyToCmdVelConverter converter;
-    ros::spin();
+    ros::Rate loop_rate(33);
+    while (ros::ok())
+    {
+        converter.run();
+        ros::spinOnce();
+        loop_rate.sleep();
+    }
     return 0;
 }
