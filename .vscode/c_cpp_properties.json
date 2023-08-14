@@ -1,0 +1,48 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/m/catkin_ws/devel/include/**",
+        "/home/m/cartographer_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/amcl/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/base_local_planner/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/carrot_planner/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/clear_costmap_recovery/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/costmap_2d/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/dwa_local_planner/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/global_planner/include/**",
+        "/home/m/catkin_ws/src/joy_to_cmd_vel/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/kubo_joy/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/laser_filters/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/map_server/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/move_base/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/move_slow_and_clear/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/nav_core/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/navfn/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/robit_master/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/robit_vision/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/robocup_rescue_2023_france/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/rotate_recovery/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/serial/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/set_imu/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/simple_move/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/turtle_go/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/turtlebot3_slam/include/**",
+        "/home/m/catkin_ws/src/turtlebot3_autorace_2023/vision_test/include/**",
+        "/home/m/catkin_ws/src/rescue_operator_2023/navigation/voxel_grid/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
